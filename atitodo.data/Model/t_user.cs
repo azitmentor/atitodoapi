@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Atitodo.Data.Model
 {
-	public class t_customer
+	public class t_user
 	{
 		public int id { get; set; }
-		public string CustomerName { get; set; }
-		public string VatNumber { get; set; }
+		public string UserName { get; set; }
+		public string Email { get; set; }
 	}
 }

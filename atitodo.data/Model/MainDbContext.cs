@@ -10,6 +10,10 @@ namespace Atitodo.Data.Model
 	{
 		public DbSet<t_todo> t_todo { get; set; }
 
+		public DbSet<t_user> t_user { get; set; }
+
+		public DbSet<t_accesslink> t_accesslink { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 			=> optionsBuilder.UseNpgsql("Host=172.17.0.1;Database=atitodo");
 
