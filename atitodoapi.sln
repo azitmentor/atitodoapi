@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atitodoapi", "atitodoapi\Atitodoapi.csproj", "{FE9AF049-3DC2-4BA4-B570-6094EC6E9AEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atitodo.Data", "atitodo.data\Atitodo.Data.csproj", "{2B6801C2-A436-4AC7-B12D-B3ABC4A78C60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE9AF049-3DC2-4BA4-B570-6094EC6E9AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9AF049-3DC2-4BA4-B570-6094EC6E9AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9AF049-3DC2-4BA4-B570-6094EC6E9AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9AF049-3DC2-4BA4-B570-6094EC6E9AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6801C2-A436-4AC7-B12D-B3ABC4A78C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6801C2-A436-4AC7-B12D-B3ABC4A78C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6801C2-A436-4AC7-B12D-B3ABC4A78C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6801C2-A436-4AC7-B12D-B3ABC4A78C60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {433E8105-AF59-4094-8E42-A2262C00F379}
+	EndGlobalSection
+EndGlobal
