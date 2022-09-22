@@ -93,7 +93,7 @@ namespace Atitodoapi.Controllers
 				_configuration["Jwt:Issuer"],
 				_configuration["Jwt:Audience"],
 				claims,
-				expires: DateTime.UtcNow.AddMinutes(120),
+				expires: DateTime.UtcNow.AddDays(120),
 				signingCredentials: signIn);
 
 			return new JwtSecurityTokenHandler().WriteToken(token);
