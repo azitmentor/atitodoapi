@@ -49,7 +49,7 @@ builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
 	builder
 	.AllowAnyMethod()
 	.AllowAnyHeader().WithOrigins("http://atitodoapp.laky.ovh").WithOrigins("https://atitodoapp.laky.ovh")
-	.WithOrigins("http://localhost:5173");
+	.WithOrigins("http://localhost:4200");
 }));
 
 
