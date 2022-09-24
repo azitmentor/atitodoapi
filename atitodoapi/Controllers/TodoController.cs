@@ -35,6 +35,24 @@ namespace Atitodoapi.Controllers
 		}
 
 		[Authorize]
+		[HttpGet("get/{id}")]
+		public ActionResult<t_todo> Get(int id)
+		{
+			if (!UserId.HasValue)
+			{
+				return Unauthorized();
+			}
+
+			var item = _mainDbContext.t_todo.FirstOrDefault(p => p.userid == UserId && p.id == id);
+
+			if(item==null)
+			{
+				return NotFound();
+			}
+			return Ok(item);
+		}
+
+		[Authorize]
 		[HttpPost("save")]
 		public ActionResult Save(t_todo item)
 		{
