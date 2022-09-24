@@ -1,12 +1,6 @@
 ﻿using Atitodo.Data.Model;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Net.Http.Headers;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Atitodoapi.Controllers
 {
@@ -71,43 +65,6 @@ namespace Atitodoapi.Controllers
 				return Ok();
 			}
 			return NotFound();
-		}
-
-		[HttpGet("jwt")]
-		public string jwt()
-		{
-			//create claims details based on the user information
-			var claims = new[] {
-						new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-						new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-						new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-						new Claim("UserId", "1234"),
-						new Claim("DisplayName", "disp"),
-						new Claim("UserName", "username"),
-						new Claim("Email", "email")
-					};
-
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-			var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-			var token = new JwtSecurityToken(
-				_configuration["Jwt:Issuer"],
-				_configuration["Jwt:Audience"],
-				claims,
-				expires: DateTime.UtcNow.AddDays(120),
-				signingCredentials: signIn);
-
-			return new JwtSecurityTokenHandler().WriteToken(token);
-		}
-
-		[Authorize]
-		[HttpGet("jwt2")]
-		public ActionResult jwt2()
-		{
-			if (!UserId.HasValue)
-			{
-				return Unauthorized();
-			}
-			return Ok(UserId);
 		}
 	}
 }

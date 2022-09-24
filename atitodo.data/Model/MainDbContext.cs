@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Atitodo.Data.Model
 {
-	public class MainDbContext : DbContext
+	public class MainDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
 	{
 		public DbSet<t_todo> t_todo { get; set; }
 

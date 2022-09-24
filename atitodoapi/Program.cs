@@ -1,5 +1,6 @@
 using Atitodo.Data.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -40,6 +41,9 @@ builder.Services.AddResponseCompression();
 
 builder.Services.AddDbContext<MainDbContext>(options =>
  options.UseNpgsql(builder.Configuration.GetConnectionString("main")));
+
+builder.Services.AddDefaultIdentity<IdentityUser<int>>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<MainDbContext>();
 
 Console.WriteLine("Cstr:{0}", builder.Configuration.GetConnectionString("main"));
 
