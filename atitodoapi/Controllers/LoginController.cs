@@ -90,7 +90,7 @@ namespace Atitodoapi.Controllers
 					expires: DateTime.UtcNow.AddDays(120),
 					signingCredentials: signIn);
 
-				return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+				return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token)});
 
 			}
 			return BadRequest();
