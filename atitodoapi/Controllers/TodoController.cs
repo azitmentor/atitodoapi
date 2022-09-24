@@ -38,11 +38,12 @@ namespace Atitodoapi.Controllers
 		[HttpPost("save")]
 		public ActionResult Save(t_todo item)
 		{
-			if (!UserId.HasValue || item.userid != UserId)
+			if (!UserId.HasValue)
 			{
 				return Unauthorized();
 			}
 
+			item.userid = UserId.Value;
 			_mainDbContext.t_todo.Update(item);
 			_mainDbContext.SaveChanges();
 			return Ok();
