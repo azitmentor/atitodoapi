@@ -29,7 +29,7 @@ namespace Atitodoapi.Controllers
 			var query = _mainDbContext.t_todo.Where(p => p.userid == UserId);
 			if (searcModel != null && !string.IsNullOrWhiteSpace(searcModel.text))
 			{
-				query = query.Where(p => p.todotext.Contains(searcModel.text));
+				query = query.Where(p => p.todotext.Contains(searcModel.text) || p.tags.Contains(searcModel.text));
 			}
 			return query.ToList();
 		}
@@ -45,7 +45,7 @@ namespace Atitodoapi.Controllers
 
 			var item = _mainDbContext.t_todo.FirstOrDefault(p => p.userid == UserId && p.id == id);
 
-			if(item==null)
+			if (item == null)
 			{
 				return NotFound();
 			}
