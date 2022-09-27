@@ -4,6 +4,7 @@ jobs:
     working_directory: /app
     docker:
       - image: docker:20-git
+    resource_class: small
     steps:
       - checkout
       - setup_remote_docker
