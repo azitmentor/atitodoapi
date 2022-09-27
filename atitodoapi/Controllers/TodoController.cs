@@ -122,5 +122,24 @@ namespace Atitodoapi.Controllers
 			}
 			return NotFound();
 		}
+
+		[Authorize]
+		[HttpGet("tags")]
+		public ActionResult GetTags()
+		{
+			if (!UserId.HasValue)
+			{
+				return Unauthorized();
+			}
+
+			var item = _mainDbContext.t_todo.Where(p => p.userid == UserId).Select(p => p.tags).Distinct().ToList(); ;
+			var result = new List<string>();
+			item.ForEach(i =>
+			{
+				var s = i.Split(", ".ToCharArray()).ToList();
+				result.AddRange(s);
+			});
+			return Ok(result.Distinct());
+		}
 	}
 }
