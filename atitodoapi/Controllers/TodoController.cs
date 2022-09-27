@@ -19,7 +19,7 @@ namespace Atitodoapi.Controllers
 
 		[Authorize]
 		[HttpPost("list")]
-		public ActionResult<List<t_todo>> GetList([FromBody] SearchModel searcModel)
+		public ActionResult<List<t_todo>> GetList([FromBody] SearchModel srcParam)
 		{
 			if (!UserId.HasValue)
 			{
@@ -27,10 +27,23 @@ namespace Atitodoapi.Controllers
 			}
 
 			var query = _mainDbContext.t_todo.Where(p => p.userid == UserId);
-			if (searcModel != null && !string.IsNullOrWhiteSpace(searcModel.text))
+
+			if (srcParam != null)
 			{
-				query = query.Where(p => p.todotext.Contains(searcModel.text) || p.tags.Contains(searcModel.text));
+				if (!srcParam.showdeleted)
+				{
+					query = query.Where(p => p.deleted == null);
+				}
+				if (!srcParam.showarchived)
+				{
+					query = query.Where(p => p.archived == null);
+				}
+				if (!string.IsNullOrWhiteSpace(srcParam.text))
+				{
+					query = query.Where(p => p.todotext.Contains(srcParam.text) || p.tags.Contains(srcParam.text));
+				}
 			}
+
 			return query.ToList();
 		}
 
@@ -62,6 +75,11 @@ namespace Atitodoapi.Controllers
 			}
 
 			item.userid = UserId.Value;
+			if (item.id == 0)
+			{
+				item.created = DateTime.Now;
+			}
+			item.modified = DateTime.Now;
 			_mainDbContext.t_todo.Update(item);
 			_mainDbContext.SaveChanges();
 			return Ok();
@@ -79,7 +97,26 @@ namespace Atitodoapi.Controllers
 			var item = _mainDbContext.t_todo.FirstOrDefault(p => p.id == id && p.userid == UserId);
 			if (item != null)
 			{
-				_mainDbContext.t_todo.Remove(item);
+				item.deleted = DateTime.Now;
+				_mainDbContext.SaveChanges();
+				return Ok();
+			}
+			return NotFound();
+		}
+
+		[Authorize]
+		[HttpPost("archive/{id}")]
+		public ActionResult Archive(int id)
+		{
+			if (!UserId.HasValue)
+			{
+				return Unauthorized();
+			}
+
+			var item = _mainDbContext.t_todo.FirstOrDefault(p => p.id == id && p.userid == UserId);
+			if (item != null)
+			{
+				item.archived = DateTime.Now;
 				_mainDbContext.SaveChanges();
 				return Ok();
 			}
