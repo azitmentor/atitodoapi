@@ -44,7 +44,14 @@ namespace Atitodoapi.Controllers
 				}
 			}
 
-			return query.ToList();
+			var result = query.ToList();
+
+			if (srcParam != null && srcParam.tags != null && srcParam.tags.Count > 0)
+			{
+				result = result.Where(t => srcParam.tags.Contains(t.tags)).ToList();
+			}
+
+			return result;
 		}
 
 		[Authorize]
