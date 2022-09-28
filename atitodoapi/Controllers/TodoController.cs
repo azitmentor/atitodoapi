@@ -132,7 +132,7 @@ namespace Atitodoapi.Controllers
 				return Unauthorized();
 			}
 
-			var item = _mainDbContext.t_todo.Where(p => p.userid == UserId).Select(p => p.tags).Distinct().ToList(); ;
+			var item = _mainDbContext.t_todo.Where(p => p.userid == UserId && p.tags != null).Select(p => p.tags).Distinct().ToList(); ;
 			var result = new List<string>();
 			item.ForEach(i =>
 			{
