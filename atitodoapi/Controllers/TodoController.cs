@@ -131,6 +131,25 @@ namespace Atitodoapi.Controllers
         }
 
         [Authorize]
+        [HttpPost("done/{id}")]
+        public ActionResult Done(int id)
+        {
+            if (!UserId.HasValue)
+            {
+                return Unauthorized();
+            }
+
+            var item = _mainDbContext.t_todo.FirstOrDefault(p => p.id == id && p.userid == UserId);
+            if (item != null)
+            {
+                item.done = DateTime.Now;
+                _mainDbContext.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [Authorize]
         [HttpGet("tags")]
         public ActionResult GetTags()
         {

@@ -4,6 +4,7 @@
     {
         public string? text { get; set; }
         public List<string> tags { get; set; }
+        public bool showdone { get; set; }
         public bool showdeleted { get; set; }
         public bool showarchived { get; set; }
         public bool deletedonly { get; set; }
