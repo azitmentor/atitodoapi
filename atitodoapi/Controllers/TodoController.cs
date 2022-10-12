@@ -38,6 +38,10 @@ namespace Atitodoapi.Controllers
                 {
                     query = query.Where(p => p.archived == null);
                 }
+                if (!srcParam.showdone)
+                {
+                    query = query.Where(p => p.done == null);
+                }
                 if (!string.IsNullOrWhiteSpace(srcParam.text))
                 {
                     query = query.Where(p => p.todotext.Contains(srcParam.text) || p.tags.Contains(srcParam.text));

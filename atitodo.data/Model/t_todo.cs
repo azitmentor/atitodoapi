@@ -25,7 +25,14 @@ namespace Atitodo.Data.Model
         [NotMapped]
         public int? realvalue
         {
-            get { return length.Value / priority.Value; }
+            get
+            {
+                if (length.HasValue && priority.HasValue)
+                {
+                    return length.Value / priority.Value;
+                }
+                return null;
+            }
         }
     }
 }
