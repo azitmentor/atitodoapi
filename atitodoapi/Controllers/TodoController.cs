@@ -51,7 +51,7 @@ namespace Atitodoapi.Controllers
                 result = result.Where(t => srcParam.tags.Contains(t.tags) || t.tags.Split(" ").Any(ta => srcParam.tags.Any(s => s == ta))).ToList();
             }
 
-            return result;
+            return result.OrderBy(p => p.realvalue).ToList();
         }
 
         [Authorize]
