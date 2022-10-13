@@ -34,12 +34,12 @@ namespace Atitodoapi.Controllers
                 {
                     query = query.Where(p => p.deleted == null);
                 }
-                
+
                 if (!srcParam.showarchived)
                 {
                     query = query.Where(p => p.archived == null);
                 }
-                
+
                 if (!srcParam.showdone)
                 {
                     query = query.Where(p => p.done == null);
@@ -48,6 +48,16 @@ namespace Atitodoapi.Controllers
                 if (srcParam.starredonly)
                 {
                     query = query.Where(p => p.starred);
+                }
+
+                if (srcParam.todayonly)
+                {
+                    query = query.Where(p => p.fortoday == DateTime.Today);
+                }
+
+                if (srcParam.wastoday)
+                {
+                    query = query.Where(p => p.fortoday != null);
                 }
 
                 if (!string.IsNullOrWhiteSpace(srcParam.text))

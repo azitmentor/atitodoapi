@@ -10,5 +10,7 @@
         public bool starredonly { get; set; }
         public bool deletedonly { get; set; }
         public bool archivedonly { get; set; }
+        public bool todayonly { get; set; }
+        public bool wastoday { get; set; }
     }
 }
