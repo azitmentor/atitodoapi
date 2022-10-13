@@ -6,7 +6,6 @@ namespace Atitodo.Data.Model
     {
         public int id { get; set; }
         public string todotext { get; set; }
-        public int? impact { get; set; }
         public int? priority { get; set; }
         public int? length { get; set; }
         public DateTime created { get; set; }

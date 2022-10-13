@@ -154,6 +154,44 @@ namespace Atitodoapi.Controllers
         }
 
         [Authorize]
+        [HttpPost("star/{id}")]
+        public ActionResult Star(int id)
+        {
+            if (!UserId.HasValue)
+            {
+                return Unauthorized();
+            }
+
+            var item = _mainDbContext.t_todo.FirstOrDefault(p => p.id == id && p.userid == UserId);
+            if (item != null)
+            {
+                item.starred = !item.starred;
+                _mainDbContext.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [Authorize]
+        [HttpPost("today/{id}")]
+        public ActionResult Today(int id)
+        {
+            if (!UserId.HasValue)
+            {
+                return Unauthorized();
+            }
+
+            var item = _mainDbContext.t_todo.FirstOrDefault(p => p.id == id && p.userid == UserId);
+            if (item != null)
+            {
+                item.fortoday = DateTime.Today;
+                _mainDbContext.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [Authorize]
         [HttpGet("tags")]
         public ActionResult GetTags()
         {
