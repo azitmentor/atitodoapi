@@ -60,6 +60,11 @@ namespace Atitodoapi.Controllers
                     query = query.Where(p => p.fortoday != null);
                 }
 
+                if (srcParam.hidebelow>0)
+                {
+                    query = query.Where(p => p.priority >= srcParam.hidebelow);
+                }
+
                 if (!string.IsNullOrWhiteSpace(srcParam.text))
                 {
                     query = query.Where(p => p.todotext.Contains(srcParam.text) || p.tags.Contains(srcParam.text));

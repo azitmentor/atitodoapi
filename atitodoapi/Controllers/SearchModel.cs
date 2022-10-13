@@ -12,5 +12,6 @@
         public bool archivedonly { get; set; }
         public bool todayonly { get; set; }
         public bool wastoday { get; set; }
+        public int hidebelow { get; set; }
     }
 }
