@@ -60,7 +60,7 @@ namespace Atitodoapi.Controllers
                     query = query.Where(p => p.fortoday != null);
                 }
 
-                if (srcParam.hidebelow>0)
+                if (srcParam.hidebelow > 0)
                 {
                     query = query.Where(p => p.priority >= srcParam.hidebelow);
                 }
@@ -215,15 +215,27 @@ namespace Atitodoapi.Controllers
         }
 
         [Authorize]
-        [HttpGet("tags")]
-        public ActionResult GetTags()
+        [HttpPost("tags")]
+        public ActionResult GetTags([FromBody] SearchModel srcParam)
         {
             if (!UserId.HasValue)
             {
                 return Unauthorized();
             }
 
-            var item = _mainDbContext.t_todo.Where(p => p.userid == UserId && p.tags != null).Select(p => p.tags).Distinct().ToList(); ;
+            var itemQuery = _mainDbContext.t_todo.Where(p => p.userid == UserId && p.tags != null);
+
+            if (!srcParam.showdeleted)
+            {
+                itemQuery = itemQuery.Where(p => p.deleted == null);
+            }
+
+            if (!srcParam.showdone)
+            {
+                itemQuery = itemQuery.Where(p => p.done == null);
+            }
+
+            var item = itemQuery.Select(p => p.tags).Distinct().ToList(); ;
             var result = new List<string>();
             item.ForEach(i =>
             {
