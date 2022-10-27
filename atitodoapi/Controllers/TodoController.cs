@@ -67,6 +67,7 @@ namespace Atitodoapi.Controllers
 
                 if (!string.IsNullOrWhiteSpace(srcParam.text))
                 {
+                    srcParam.text = srcParam.text.Trim().ToLower();
                     query = query.Where(p => p.todotext.Contains(srcParam.text) || p.tags.Contains(srcParam.text));
                 }
             }
