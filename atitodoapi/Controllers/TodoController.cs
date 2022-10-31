@@ -243,7 +243,7 @@ namespace Atitodoapi.Controllers
                 var s = i.Split(", ".ToCharArray()).ToList();
                 result.AddRange(s);
             });
-            return Ok(result.Distinct());
+            return Ok(result.Distinct().OrderBy(p => p));
         }
     }
 }
