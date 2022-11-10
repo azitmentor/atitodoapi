@@ -76,7 +76,7 @@ namespace Atitodoapi.Controllers
 
             if (srcParam != null && srcParam.tags != null && srcParam.tags.Count > 0)
             {
-                result = result.Where(t => srcParam.tags.Contains(t.tags) || t.tags.Split(" ").Any(ta => srcParam.tags.Any(s => s == ta))).ToList();
+                result = result.Where(t => srcParam.tags.Contains(t.tags) || (t.tags != null && t.tags.Split(" ").Any(ta => srcParam.tags.Any(s => s == ta)))).ToList();
             }
 
             return result.OrderBy(p => p.realvalue).ToList();
@@ -236,14 +236,14 @@ namespace Atitodoapi.Controllers
                 itemQuery = itemQuery.Where(p => p.done == null);
             }
 
-            var item = itemQuery.Select(p => p.tags).Distinct().ToList(); ;
+            var item = itemQuery.Select(p => p.tags).Distinct().ToList();
             var result = new List<string>();
             item.ForEach(i =>
             {
                 var s = i.Split(", ".ToCharArray()).ToList();
                 result.AddRange(s);
             });
-            return Ok(result.Distinct().OrderBy(p => p));
+            return Ok(result.Where(o => !string.IsNullOrWhiteSpace(o)).Distinct().OrderBy(p => p));
         }
     }
 }
