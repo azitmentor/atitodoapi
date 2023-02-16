@@ -115,6 +115,10 @@ namespace Atitodoapi.Controllers
                 item.created = DateTime.Now;
             }
             item.modified = DateTime.Now;
+            if (!string.IsNullOrWhiteSpace(item.tags))
+            {
+                item.tags = item.tags.ToLower();
+            }
             _mainDbContext.t_todo.Update(item);
             _mainDbContext.SaveChanges();
             return Ok();
